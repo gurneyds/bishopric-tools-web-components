@@ -2,6 +2,7 @@ var VisitsPage = require('../components/VisitsPage');
 var InterviewsPage = require('../components/InterviewsPage');
 var WardCouncilPage = require('../components/WardCouncilPage');
 var SacramentMeetingPage = require('../components/SacramentMeetingPage');
+var DataService = require('../services/DataService');
 
 module.exports = (function() {
 	// Watch for nav bar changes
@@ -23,6 +24,7 @@ module.exports = (function() {
 		// Show the selected page
 		if(page) {
 			page.style.display = 'block';
+			page.setData(DataService.getAllData());
 		} else {
 			document.location.hash = '#visits-page-html';
 		}

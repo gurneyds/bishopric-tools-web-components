@@ -38,6 +38,9 @@
 			this.addEventListener('list-picker-item-added', function(event){
 				console.log("Added event:" + JSON.stringify(event.detail));
 			});
+
+			this._listPicker = root.querySelector('list-picker-html');
+			this._details = root.querySelector('details-view-html');
 		};
 
 		Proto.attachedCallback = function() {
@@ -51,6 +54,10 @@
 		Proto.attributeChangedCallback = function(attrName, oldVal, newVal) {
 			console.log(attrName + ", " + oldVal + ', ' + newVal);
 		};
+
+		Proto.setData = function(dataArray) {
+			this._listPicker.setData(dataArray.visits);
+		}
 
 		document.registerElement('visits-page-html', {
 			prototype: Proto

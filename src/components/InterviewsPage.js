@@ -7,6 +7,12 @@ InterviewPageProto.createdCallback = function() {
 	this.innerHTML = "<div class='container'><h2>This is the interview page</h2><list-picker></list-picker><details-view></details-view></div>";
 }
 
+InterviewPageProto.setData = function(dataArray) {
+	dataArray.interviews.forEach(function(item) {
+		console.log(JSON.stringify(item));
+	});
+}
+
 var InterviewsPage = document.registerElement('interviews-page', {
 	prototype: InterviewPageProto
 });

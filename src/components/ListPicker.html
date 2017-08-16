@@ -39,6 +39,15 @@
 
 		Proto.attributeChangedCallback = function(attrName, oldVal, newVal) {
 			console.log(attrName + ", " + oldVal + ', ' + newVal);
+
+			// TODO - redraw the screen with the updated options
+		};
+
+		Proto.setData = function(dataArray) {
+			// TODO - redraw the screen using the new data
+			dataArray.forEach(function(item){
+				console.log(JSON.stringify(item));
+			})
 		};
 
 
