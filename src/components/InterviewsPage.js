@@ -7,8 +7,8 @@ InterviewPageProto.createdCallback = function() {
 	this.innerHTML = "<div class='container'><h2>This is the interview page</h2><list-picker></list-picker><details-view></details-view></div>";
 }
 
-var InterviewPage = document.registerElement('interview-page', {
+var InterviewsPage = document.registerElement('interviews-page', {
 	prototype: InterviewPageProto
 });
 
-module.exports = InterviewPage;
+module.exports = InterviewsPage;
