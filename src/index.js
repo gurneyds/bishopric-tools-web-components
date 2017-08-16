@@ -2,7 +2,7 @@ require('./main.css');
 // var ListPicker = require('./components/ListPicker.js');
 // var Details = require('./components/DetailsView.js');
 require('./components/InterviewPage');
-require('./components/VisitsPage');
+//require('./components/VisitsPage');
 require('./components/WardCouncilPage');
 require('./components/SacramentMeetingPage');
 

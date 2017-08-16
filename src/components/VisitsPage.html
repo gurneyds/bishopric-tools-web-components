@@ -1,0 +1,42 @@
+<!-- This component has a dependency on the list picker and the details view, so import them -->
+<link rel="import" href="ListPicker.html"/>
+<link rel="import" href="DetailsView.html"/>
+
+<template>
+	<div class='container'>
+		<h2>Visits page2</h2>
+		<list-picker-html></list-picker-html>
+		<details-view-html></details-view-html>
+	</div>
+</template>
+
+<script>
+	(function(){
+		var Proto = Object.create(HTMLElement.prototype);
+		var importDoc = document.currentScript.ownerDocument;
+
+		Proto.createdCallback = function() {
+			var template = importDoc.querySelector('template');
+			var templateClone = document.importNode(template.content, true);
+
+			var root = this.createShadowRoot();
+			root.appendChild(templateClone);
+		};
+
+		Proto.attachedCallback = function() {
+			console.log('attached');
+		};
+
+		Proto.detachedCallback = function() {
+			console.log('detatched');
+		};
+
+		Proto.attributeChangedCallback = function(attrName, oldVal, newVal) {
+			console.log(attrName + ", " + oldVal + ', ' + newVal);
+		};
+
+		document.registerElement('visits-page-html', {
+			prototype: Proto
+		});
+	})();
+</script>
