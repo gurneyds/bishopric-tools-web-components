@@ -3,9 +3,16 @@
 <link rel="import" href="DetailsView.html"/>
 
 <template>
+	<style>
+		.container {
+			border: 1px solid black;
+			margin: 5px;
+			padding: 5px;
+		}
+	</style>
 	<div class='container'>
 		<h2>Visits page HTML</h2>
-		<list-picker-html></list-picker-html>
+		<list-picker-html showName showDate showOrg></list-picker-html>
 		<details-view-html></details-view-html>
 	</div>
 </template>
@@ -21,6 +28,16 @@
 
 			var root = this.createShadowRoot();
 			root.appendChild(templateClone);
+
+			// Listen for list picker selected events
+			this.addEventListener('list-picker-item-selected', function(event){
+				console.log("Selected event:" + JSON.stringify(event.detail));
+			});
+
+			// Listen for list picker add events
+			this.addEventListener('list-picker-item-added', function(event){
+				console.log("Added event:" + JSON.stringify(event.detail));
+			});
 		};
 
 		Proto.attachedCallback = function() {

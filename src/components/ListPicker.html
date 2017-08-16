@@ -1,5 +1,7 @@
 <template>
 	<h2>List picker HTML</h2>
+	<input id="select-button" type="button" value="Select Item"/>
+	<input id="add-button" type="button" value="Add Item"/>
 </template>
 
 
@@ -9,12 +11,36 @@
 		var importDoc = document.currentScript.ownerDocument;
 
 		Proto.createdCallback = function() {
+			this.showName = (this.getAttribute('showName') != null) ? true:false;
+			this.showDate = (this.getAttribute('showDate') != null) ? true:false;
+			this.showOrg = (this.getAttribute('showOrg') != null) ? true:false;
+			this.showCount = (this.getAttribute('showCount') != null) ? true:false;
+
 			var template = importDoc.querySelector('template');
 			var templateClone = document.importNode(template.content, true);
 
 			var root = this.createShadowRoot();
 			root.appendChild(templateClone);
+
+			root.querySelector("#select-button").addEventListener('click', function(){
+				// Simulate the selected item
+				var selectedItem = {id: 1234, name:'Frank', date: '16Aug2017'};
+				var event = new CustomEvent('list-picker-item-selected', {detail: selectedItem});
+				root.dispatchEvent(event);
+			});
+
+			root.querySelector("#add-button").addEventListener('click', function(){
+				// Simulate the added item
+				var addedItem = {name:'John', date: '17Aug2017'};
+				var event = new CustomEvent('list-picker-item-added', {detail: addedItem});
+				root.dispatchEvent(event);
+			});
 		};
+
+		Proto.attributeChangedCallback = function(attrName, oldVal, newVal) {
+			console.log(attrName + ", " + oldVal + ', ' + newVal);
+		};
+
 
 		document.registerElement('list-picker-html', {
 			prototype: Proto

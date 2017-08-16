@@ -5,7 +5,11 @@ require('./DetailsView');
 
 var VisitsPageProto = Object.create(HTMLElement.prototype);
 
-var template = "<div class='container'><h2>This is the visits page</h2><list-picker></list-picker><details-view></details-view></div>";
+var template = "<style>.container {\n" +
+	"    border: 1px solid black;\n" +
+	"    margin: 5px;\n" +
+	"    padding: 5px;\n" +
+	"}</style><div class='container'><h2>This is the visits page</h2><list-picker></list-picker><details-view></details-view></div>";
 
 VisitsPageProto.createdCallback = function() {
 	var root = this.createShadowRoot();
