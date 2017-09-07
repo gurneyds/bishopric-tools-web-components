@@ -1,21 +1,39 @@
+"use strict";
 require('./ListPicker');
 require('./DetailsView');
 
-var WardCouncilPageProto = Object.create(HTMLElement.prototype);
+(function() {
+  let template = `
+    <style>
+      .container {
+  	     border: 1px solid black;
+         margin: 5px;
+         padding: 5px;
+       }
+    </style>
+    <div class='container'>
+      <h2>This is the Ward Council page</h2>
+      <list-picker></list-picker>
+      <details-view></details-view>
+    </div>
+  `;
 
-WardCouncilPageProto.createdCallback = function() {
-	this.innerHTML = "<div class='container'><h2>This is the Ward Council page</h2><list-picker></list-picker><details-view></details-view></div>";
-}
+  class WardCouncilPage extends HTMLElement {
+    constructor() {
+      super();
+      consol.log("WardCouncilPage constructor called");
+      // Shadow Root
+      this._root = this.attachShadow({mode: "open"});
+    }
 
-WardCouncilPageProto.setData = function(dataArray) {
-	console.log("WardCouncilPage setData called");
-	dataArray.wardCouncil.forEach(function(item) {
-//		console.log(JSON.stringify(item));
-	});
-}
+    createdCallback() {
+      this.createShadowRoot().innerHTML = template;
+    }
 
-var WardCouncilPage = document.registerElement('ward-council-page', {
-	prototype: WardCouncilPageProto
-});
+    setData(data) {
+      console.log('wardCouncilPage setData called');
+    }
+  }
 
-module.exports = WardCouncilPage;
+  document.registerElement('ward-council-page', WardCouncilPage);
+})();

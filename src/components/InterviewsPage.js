@@ -1,21 +1,39 @@
+"use strict";
 require('./ListPicker');
 require('./DetailsView');
 
-var InterviewPageProto = Object.create(HTMLElement.prototype);
+(function() {
+	let template = `
+	<style>
+		.container {
+			border: 1px solid black;
+			margin: 5px;
+			padding: 5px;
+		}
+	</style>
+	<div class='container'>
+		<h2>This is the interviews page</h2>
+		<list-picker></list-picker>
+		<details-view></details-view>
+	</div>
+	`;
 
-InterviewPageProto.createdCallback = function() {
-	this.innerHTML = "<div class='container'><h2>This is the interview page</h2><list-picker></list-picker><details-view></details-view></div>";
-}
+	class InterviewsPage extends HTMLElement {
+		constructor() {
+			super();
+			consol.log("InterviewsPage constructor called");
+			// Shadow Root
+			this._root = this.attachShadow({mode: "open"});
+		}
 
-InterviewPageProto.setData = function(dataArray) {
-	console.log("InterviewsPage setData called");
-	dataArray.interviews.forEach(function(item) {
-//		console.log(JSON.stringify(item));
-	});
-}
+		createdCallback() {
+			this.createShadowRoot().innerHTML = template;
+		}
 
-var InterviewsPage = document.registerElement('interviews-page', {
-	prototype: InterviewPageProto
-});
+		setData(data) {
+			console.log('interviewsPage setData called');
+		}
+	}
 
-module.exports = InterviewsPage;
+	document.registerElement('interviews-page', InterviewsPage);
+})();

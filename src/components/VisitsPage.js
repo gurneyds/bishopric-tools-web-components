@@ -1,36 +1,39 @@
+"use strict";
 require('./ListPicker');
 require('./DetailsView');
 
-// document.currentScript.ownerDocument
+(function() {
+	let template = `
+	<style>
+		.container {
+			border: 1px solid black;
+			margin: 5px;
+			padding: 5px;
+		}
+	</style>
+	<div class='container'>
+		<h2>This is the visits page</h2>
+		<list-picker></list-picker>
+		<details-view></details-view>
+	</div>
+	`;
 
-var VisitsPageProto = Object.create(HTMLElement.prototype);
+	class VisitsPage extends HTMLElement {
+		constructor() {
+			super();
+			consol.log("VisitsPage constructor called");
+			// Shadow Root
+			this._root = this.attachShadow({mode: "open"});
+		}
 
-var template = "<style>.container {\n" +
-	"    border: 1px solid black;\n" +
-	"    margin: 5px;\n" +
-	"    padding: 5px;\n" +
-	"}</style><div class='container'><h2>This is the visits page</h2><list-picker></list-picker><details-view></details-view></div>";
+		createdCallback() {
+			this.createShadowRoot().innerHTML = template;
+		}
 
-VisitsPageProto.createdCallback = function() {
-	console.log("VisitsPage createdCallback called");
-	var root = this.createShadowRoot();
-	root.innerHTML = template;
-};
+		setData(data) {
+			console.log('visitPage setData called');
+		}
+	}
 
-VisitsPageProto.attachedCallback = function() {
-	console.log('attached');
-};
-
-VisitsPageProto.detachedCallback = function() {
-	console.log('detatched');
-};
-
-VisitsPageProto.attributeChangedCallback = function(attrName, oldVal, newVal) {
-	console.log(attrName + ", " + oldVal + ', ' + newVal);
-};
-
-var VisitsPage = document.registerElement('visits-page', {
-	prototype: VisitsPageProto
-});
-
-module.exports = VisitsPage;
+	document.registerElement('visits-page', VisitsPage);
+})();

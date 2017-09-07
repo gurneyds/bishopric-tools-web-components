@@ -1,21 +1,39 @@
+"use strict";
 require('./ListPicker');
 require('./DetailsView');
 
-var SacramentMeetingPageProto = Object.create(HTMLElement.prototype);
+(function() {
+	let template = `
+	<style>
+		.container {
+			border: 1px solid black;
+			margin: 5px;
+			padding: 5px;
+		}
+	</style>
+	<div class='container'>
+		<h2>This is the Sacrament meeting page</h2>
+		<list-picker></list-picker>
+		<details-view></details-view>
+	</div>
+	`;
 
-SacramentMeetingPageProto.createdCallback = function() {
-	this.innerHTML = "<div class='container'><h2>This is the Sacrament Meeting page</h2><list-picker></list-picker><details-view></details-view></div>";
-}
+	class SacramentMeetingPage extends HTMLElement {
+		constructor() {
+			super();
+			consol.log("Sacrament meeting constructor called");
+			// Shadow Root
+			this._root = this.attachShadow({mode: "open"});
+		}
 
-SacramentMeetingPageProto.setData = function(dataArray) {
-	console.log("SacramentMeetingPage setData called");
-	dataArray.sacramentMeeting.forEach(function(item) {
-//		console.log(JSON.stringify(item));
-	});
-}
+		createdCallback() {
+			this.createShadowRoot().innerHTML = template;
+		}
 
-var SacramentMeetingPage = document.registerElement('sacrament-meeting-page', {
-	prototype: SacramentMeetingPageProto
-});
+		setData(data) {
+			console.log('sacrament meeting page setData called');
+		}
+	}
 
-module.exports = SacramentMeetingPage;
+	document.registerElement('sacrament-meeting-page', SacramentMeetingPage);
+})();
