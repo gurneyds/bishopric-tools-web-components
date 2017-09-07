@@ -1,21 +1,35 @@
-var DetailsViewProto = Object.create(HTMLElement.prototype);
+"use strict";
 
-DetailsViewProto.createdCallback = function() {
-	this.innerHTML = "<h3>Details View</h3>";
-}
+(function() {
+	let template = `
+	<style>
+		.container {
+			border: 1px solid black;
+			margin: 5px;
+			padding: 5px;
+		}
+	</style>
+	<div class='container'>
+		<h2>This is the details view page</h2>
+	</div>
+	`;
 
-var DetailsView = document.registerElement('details-view', {
-	prototype: DetailsViewProto
-});
+	class DetailsView extends HTMLElement {
+		constructor() {
+			super();
+			consol.log("DetailsView constructor called");
+			// Shadow Root
+			this._root = this.attachShadow({mode: "open"});
+		}
 
-var bar = `
-	<html>
-		<head></head>
-		<body>Here is the body</body>
-	</html>
-`;
-var foo = () => {console.log(bar);};
+		createdCallback() {
+			this.createShadowRoot().innerHTML = template;
+		}
 
-//console.log(foo());
+		setData(data) {
+			console.log('DetailsView setData called');
+		}
+	}
 
-module.exports = DetailsView;
+	document.registerElement('details-view', DetailsView);
+})();

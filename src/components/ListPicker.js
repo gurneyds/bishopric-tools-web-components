@@ -1,13 +1,35 @@
-var ListPickerProto = Object.create(HTMLElement.prototype);
+"use strict";
 
-var markup = "<h2>This is the list picker</h2>";
+(function() {
+	let template = `
+	<style>
+		.container {
+			border: 1px solid black;
+			margin: 5px;
+			padding: 5px;
+		}
+	</style>
+	<div class='container'>
+		<h2>This is the list picker page</h2>
+	</div>
+	`;
 
-ListPickerProto.createdCallback = function() {
-	this.innerHTML = markup;
-}
+	class ListPicker extends HTMLElement {
+		constructor() {
+			super();
+			consol.log("ListPicker constructor called");
+			// Shadow Root
+			this._root = this.attachShadow({mode: "open"});
+		}
 
-var ListPicker = document.registerElement('list-picker', {
-	prototype: ListPickerProto
-});
+		createdCallback() {
+			this.createShadowRoot().innerHTML = template;
+		}
 
-module.exports = ListPicker;
+		setData(data) {
+			console.log('ListPicker setData called');
+		}
+	}
+
+	document.registerElement('list-picker', ListPicker);
+})();
