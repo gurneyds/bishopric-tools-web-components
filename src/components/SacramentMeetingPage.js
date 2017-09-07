@@ -8,8 +8,9 @@ SacramentMeetingPageProto.createdCallback = function() {
 }
 
 SacramentMeetingPageProto.setData = function(dataArray) {
+	console.log("SacramentMeetingPage setData called");
 	dataArray.sacramentMeeting.forEach(function(item) {
-		console.log(JSON.stringify(item));
+//		console.log(JSON.stringify(item));
 	});
 }
 

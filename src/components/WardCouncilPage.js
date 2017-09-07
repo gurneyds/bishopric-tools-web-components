@@ -8,8 +8,9 @@ WardCouncilPageProto.createdCallback = function() {
 }
 
 WardCouncilPageProto.setData = function(dataArray) {
+	console.log("WardCouncilPage setData called");
 	dataArray.wardCouncil.forEach(function(item) {
-		console.log(JSON.stringify(item));
+//		console.log(JSON.stringify(item));
 	});
 }
 

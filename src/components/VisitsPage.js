@@ -12,6 +12,7 @@ var template = "<style>.container {\n" +
 	"}</style><div class='container'><h2>This is the visits page</h2><list-picker></list-picker><details-view></details-view></div>";
 
 VisitsPageProto.createdCallback = function() {
+	console.log("VisitsPage createdCallback called");
 	var root = this.createShadowRoot();
 	root.innerHTML = template;
 };

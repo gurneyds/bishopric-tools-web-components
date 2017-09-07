@@ -8,8 +8,9 @@ InterviewPageProto.createdCallback = function() {
 }
 
 InterviewPageProto.setData = function(dataArray) {
+	console.log("InterviewsPage setData called");
 	dataArray.interviews.forEach(function(item) {
-		console.log(JSON.stringify(item));
+//		console.log(JSON.stringify(item));
 	});
 }
 

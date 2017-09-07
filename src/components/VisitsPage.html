@@ -23,6 +23,7 @@
 		var importDoc = document.currentScript.ownerDocument;
 
 		Proto.createdCallback = function() {
+			console.log("VisitsPage.html createdCallback called");
 			var template = importDoc.querySelector('template');
 			var templateClone = document.importNode(template.content, true);
 

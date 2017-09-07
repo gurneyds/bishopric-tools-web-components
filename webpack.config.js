@@ -16,5 +16,24 @@ module.exports = {
 				loader: 'style-loader!css-loader'
 			}
 		],
+		rules: [
+    {
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['env']
+        }
+      }
+    },
+		{
+			test: /\.css$/,
+			exclude: /node_modules/,
+			use: {
+				loader: 'css-loader'
+			}
+		}
+  ]
 	}
 };

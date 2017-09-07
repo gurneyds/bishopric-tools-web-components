@@ -17,7 +17,7 @@ module.exports = (function() {
 		var page = hash ? document.querySelector(hash) : null;
 
 		// Hide all of the pages
-		document.querySelectorAll('visits-page-html, interviews-page, ward-council-page, sacrament-meeting-page').forEach(function(page) {
+		document.querySelectorAll('visits-page-html, visits-page-two, interviews-page, ward-council-page-two, sacrament-meeting-page').forEach(function(page) {
 			page.style.display = 'none';
 		});
 
