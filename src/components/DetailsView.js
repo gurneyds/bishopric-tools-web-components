@@ -17,13 +17,11 @@
 	class DetailsView extends HTMLElement {
 		constructor() {
 			super();
-			consol.log("DetailsView constructor called");
 			// Shadow Root
-			this._root = this.attachShadow({mode: "open"});
+			this.attachShadow({mode: "open"}).innerHTML = template;
 		}
 
 		createdCallback() {
-			this.createShadowRoot().innerHTML = template;
 		}
 
 		setData(data) {
@@ -31,5 +29,5 @@
 		}
 	}
 
-	document.registerElement('details-view', DetailsView);
+	customElements.define('details-view', DetailsView);
 })();

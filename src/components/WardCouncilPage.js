@@ -10,24 +10,29 @@ require('./DetailsView');
 			margin: 5px;
 			padding: 5px;
 		}
+		.parts-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr
+		}
 	</style>
 	<div class='container'>
 		<h2>This is the Ward Council page</h2>
-		<list-picker></list-picker>
-		<details-view></details-view>
+		<div class="parts-container">
+			<list-picker></list-picker>
+			<details-view></details-view>
+		</div>
 	</div>
 	`;
 
 	class WardCouncilPage extends HTMLElement {
 		constructor() {
 			super();
-			consol.log("WardCouncilPage constructor called");
+			console.log("WardCouncilPage constructor called");
 			// Shadow Root
-			this._root = this.attachShadow({mode: "open"});
+			this.attachShadow({mode: "open"}).innerHTML = template;
 		}
 
 		createdCallback() {
-			this.createShadowRoot().innerHTML = template;
 		}
 
 		setData(data) {
@@ -35,5 +40,5 @@ require('./DetailsView');
 		}
 	}
 
-	document.registerElement('ward-council-page', WardCouncilPage);
+	customElements.define('ward-council-page', WardCouncilPage);
 })();

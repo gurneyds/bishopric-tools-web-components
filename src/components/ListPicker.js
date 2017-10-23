@@ -4,45 +4,78 @@
 	let template = `
 	<style>
 		.container {
-			border: 1px solid black;
+			border: 1px solid red;
 			margin: 5px;
 			padding: 5px;
 		}
 		.list-container {
-			border: 1px solid #ddd;
+			border: 1px solid blue;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
 		}
 		.list-container > div {
+			border-right: 1px solid black;
+			padding-bottom:5px;
+			padding-top:5px;
+			padding-left:10px;
 		}
 		.list-container > div:hover {
 			background: yellow;
 		}
-		.delete-button {
-			background: url(images/delete.png) no-repeat 6px center;
+		.header {
+			font-weight:bold;
+			font-size:120%;
+			border-bottom: 1px solid black;
 		}
-		.close {
-			position: absolute;
-			top: 15px;
-			right: 35px;
-			color: #f1f1f1;
-			font-size: 40px;
-			font-weight: bold;
-			transition: 0.3s;
+		.row-container {
+			border: 1px solid blue;
+		}
+		.row {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+		}
+		.row:hover {
+			background: yellow;
+		}
+		.row > span, .row > a {
+			border-right: 1px solid black;
+			padding-bottom:5px;
+			padding-top:5px;
+			padding-left:10px;
 		}
 
-		.close:hover,
-		.close:focus {
-			color: #bbb;
-			text-decoration: none;
-			cursor: pointer;
+		.down.header:after {
+			content: '▼';
+			display: inline-block;
+			margin-left: 5px;
+			transition: all 0.25s;
+			transform: rotate(0);
+			font-size: 40%;
+			color: gray;
+		}
+		.up.header:after {
+			transform: rotate(180deg);
 		}
 	</style>
 	<div class='container'>
-		<h2>This is the list picker page</h2>
-		<div class='list-container'>
-			<div>Item one <span class="close">x</span></div>
-			<div>Item two</div>
-			<div>Item three</div>
-			<div>Item four</div>
+		<h2>Pick an item</h2>
+		<div class="row-container">
+			<div class="row">
+				<a class="header">Name</a> <a class="header down">Date</a> <a class="header">Organization</a> <a class="header">Count</a>
+			</div>
+
+			<div class="row">
+				<span>John</span><span>26 Sept 2017</span><span>Elders</span><span>245</span>
+			</div>
+			<div class="row">
+				<span>John</span><span>26 Sept 2017</span><span>Elders</span><span>245</span>
+			</div>
+			<div class="row">
+				<span>John</span><span>26 Sept 2017</span><span>Elders</span><span>245</span>
+			</div>
+			<div class="row">
+				<span>John</span><span>26 Sept 2017</span><span>Elders</span><span>245</span>
+			</div>
 		</div>
 	</div>
 	`;
@@ -62,6 +95,16 @@
 
 		connectedCallback() {
 			console.log('connectedCallback called');
+			this.hasNameCol = this.getAttribute('nameCol') || true;
+			this.hasDateCol = this.getAttribute('dateCol') || false;
+			this.hasCountCol = this.getAttribute('countCol') || false;
+			this.hasOrgCol = this.getAttribute('orgCol') || false;
+
+			// Watch for header click events
+			Array.prototype.forEach.call(this.shadowRoot.querySelectorAll('.header'), function(el) {
+				console.log('hi');
+				el.addEventListener('click', () => {this.open = !this.open;});
+			});
 		}
 
 		setData(data) {

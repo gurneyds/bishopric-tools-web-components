@@ -10,24 +10,29 @@ require('./DetailsView');
 			margin: 5px;
 			padding: 5px;
 		}
+		.parts-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr
+		}
 	</style>
+
 	<div class='container'>
-		<h2>This is the visits page</h2>
-		<list-picker></list-picker>
-		<details-view></details-view>
+		<h2>Visit Tracking</h2>
+		<div class="parts-container">
+			<list-picker nameCol="true" dateCol="true" countCol="true" orgCol="true"></list-picker>
+			<details-view></details-view>
+		</div>
 	</div>
 	`;
 
 	class VisitsPage extends HTMLElement {
 		constructor() {
 			super();
-			consol.log("VisitsPage constructor called");
 			// Shadow Root
-			this._root = this.attachShadow({mode: "open"});
+			this.attachShadow({mode: "open"}).innerHTML = template;
 		}
 
 		createdCallback() {
-			this.createShadowRoot().innerHTML = template;
 		}
 
 		setData(data) {
@@ -35,5 +40,5 @@ require('./DetailsView');
 		}
 	}
 
-	document.registerElement('visits-page', VisitsPage);
+	customElements.define('visits-page', VisitsPage);
 })();

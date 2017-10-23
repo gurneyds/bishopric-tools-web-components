@@ -10,24 +10,27 @@ require('./DetailsView');
 			margin: 5px;
 			padding: 5px;
 		}
-	</style>
+		.parts-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr
+		}	</style>
 	<div class='container'>
 		<h2>This is the Sacrament meeting page</h2>
-		<list-picker></list-picker>
-		<details-view></details-view>
+		<div class="parts-container">
+			<list-picker></list-picker>
+			<details-view></details-view>
+		</div>
 	</div>
 	`;
 
 	class SacramentMeetingPage extends HTMLElement {
 		constructor() {
 			super();
-			consol.log("Sacrament meeting constructor called");
 			// Shadow Root
-			this._root = this.attachShadow({mode: "open"});
+			this.attachShadow({mode: "open"}).innerHTML = template;
 		}
 
 		createdCallback() {
-			this.createShadowRoot().innerHTML = template;
 		}
 
 		setData(data) {
@@ -35,5 +38,5 @@ require('./DetailsView');
 		}
 	}
 
-	document.registerElement('sacrament-meeting-page', SacramentMeetingPage);
+	customElements.define('sacrament-meeting-page', SacramentMeetingPage);
 })();
