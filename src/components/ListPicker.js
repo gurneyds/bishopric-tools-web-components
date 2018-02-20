@@ -103,7 +103,9 @@
 			// Watch for header click events
 			Array.prototype.forEach.call(this.shadowRoot.querySelectorAll('.header'), function(el) {
 				console.log('hi');
-				el.addEventListener('click', () => {this.open = !this.open;});
+				el.addEventListener('click', () => {
+					console.log("header clicked");
+				});
 			});
 		}
 
@@ -113,7 +115,7 @@
 		}
 
 		_render() {
-
+			// Render the columns based on the attributes
 		}
 	}
 
